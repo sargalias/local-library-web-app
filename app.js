@@ -37,20 +37,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ROUTES
 const indexRouter = require('./routes/index');
+// const usersRouter = require('./routes/users');
 const catalogIndexRouter = require('./routes/catalogIndex');
 const bookRouter = require('./routes/books');
 const authorRouter = require('./routes/authors');
 const bookinstanceRouter = require('./routes/bookinstances');
 const genreRouter = require('./routes/genres');
-// const usersRouter = require('./routes/users');
 
 app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 app.use('/catalog', catalogIndexRouter);
 app.use('/catalog/books', bookRouter);
 app.use('/catalog/authors', authorRouter);
 app.use('/catalog/bookinstances', bookinstanceRouter);
 app.use('/catalog/genres', genreRouter);
-// app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

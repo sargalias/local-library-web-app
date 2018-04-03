@@ -16,19 +16,19 @@ router.get('/new', genreController.genre_new);
 router.post('/', genreController.genre_create);
 
 // Show
-router.get('/:author_id', genreController.genre_show);
+router.get('/:genre_id', genreController.genre_show);
 
 // Edit
-router.get('/:author_id', genreController.genre_edit);
+router.get('/:genre_id/edit', genreController.genre_edit);
 
 // Update
-router.put('/:author_id', genreController.genre_update);
+router.put('/:genre_id', genreController.genre_update);
 
 // Delete
-router.delete('/:author_id', genreController.genre_delete);
+router.delete('/:genre_id', genreController.genre_delete);
 
 // Delete form
-router.get('/:author_id/delete', genreController.genre_delete_form);
+router.get('/:genre_id/delete', genreController.genre_delete_form);
 
 
 

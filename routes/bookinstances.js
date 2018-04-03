@@ -16,19 +16,19 @@ router.get('/new', bookinstanceController.bookinstance_new);
 router.post('/', bookinstanceController.bookinstance_create);
 
 // Show
-router.get('/:author_id', bookinstanceController.bookinstance_show);
+router.get('/:bookinstance_id', bookinstanceController.bookinstance_show);
 
 // Edit
-router.get('/:author_id', bookinstanceController.bookinstance_edit);
+router.get('/:bookinstance_id/edit', bookinstanceController.bookinstance_edit);
 
 // Update
-router.put('/:author_id', bookinstanceController.bookinstance_update);
+router.put('/:bookinstance_id', bookinstanceController.bookinstance_update);
 
 // Delete
-router.delete('/:author_id', bookinstanceController.bookinstance_delete);
+router.delete('/:bookinstance_id', bookinstanceController.bookinstance_delete);
 
 // Delete form
-router.get('/:author_id/delete', bookinstanceController.bookinstance_delete_form);
+router.get('/:bookinstance_id/delete', bookinstanceController.bookinstance_delete_form);
 
 
 

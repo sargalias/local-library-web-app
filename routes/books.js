@@ -1,5 +1,5 @@
 const express = require('express');
-const bookController = require('../controllers/bookinstanceController');
+const bookController = require('../controllers/bookController');
 
 const router = express.Router();
 
@@ -7,28 +7,28 @@ const router = express.Router();
 // ROUTES
 
 // Index
-router.get('/', bookController.bookinstance_list);
+router.get('/', bookController.book_list);
 
 // New
-router.get('/new', bookController.bookinstance_new);
+router.get('/new', bookController.book_new);
 
 // Create
-router.post('/', bookController.bookinstance_create);
+router.post('/', bookController.book_create);
 
 // Show
-router.get('/:author_id', bookController.bookinstance_show);
+router.get('/:author_id', bookController.book_show);
 
 // Edit
-router.get('/:author_id', bookController.bookinstance_edit);
+router.get('/:author_id/edit', bookController.book_edit);
 
 // Update
-router.put('/:author_id', bookController.bookinstance_update);
+router.put('/:author_id', bookController.book_update);
 
 // Delete
-router.delete('/:author_id', bookController.bookinstance_delete);
+router.delete('/:author_id', bookController.book_delete);
 
 // Delete form
-router.get('/:author_id/delete', bookController.bookinstance_delete_form);
+router.get('/:author_id/delete', bookController.book_delete_form);
 
 
 
