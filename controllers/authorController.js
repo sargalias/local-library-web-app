@@ -6,7 +6,7 @@ exports.author_list = function(req, res) {
 };
 
 // Author show
-exports.show_author = function(req, res) {
+exports.author_show = function(req, res) {
     res.send('NOT IMPLEMENTED: Show author ' + req.params.author_id);
 };
 
@@ -21,21 +21,21 @@ exports.author_create = function(req, res) {
 };
 
 // Author delete page
-exports.author_delete_get = function(req, res) {
+exports.author_delete_form = function(req, res) {
     res.send('NOT IMPLEMENTED: Author delete GET');
 };
 
 // Author delete
-exports.author_delete_post = function(req, res) {
+exports.author_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: Author delete POST');
 };
 
 // Author edit
-exports.author_update_get = function(req, res) {
+exports.author_edit = function(req, res) {
     res.send('NOT IMPLEMENTED: Author update GET');
 };
 
 // Author update
-exports.author_update_post = function(req, res) {
+exports.author_update = function(req, res) {
     res.send('NOT IMPLEMENTED: Author update POST');
 };
