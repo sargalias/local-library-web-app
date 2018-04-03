@@ -1,41 +1,41 @@
 const genreModel = require('../models/genre');
 
-// Display list of all Genre.
+// Genre list
 exports.genre_list = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre list');
 };
 
-// Display detail page for a specific Genre.
+// Genre show
 exports.genre_show = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre detail: ' + req.params.id);
 };
 
-// Display Genre create form on GET.
+// Genre new
 exports.genre_new = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre create GET');
 };
 
-// Handle Genre create on POST.
+// Genre create
 exports.genre_create = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre create POST');
 };
 
-// Display Genre delete form on GET.
+// Genre delete form
 exports.genre_delete_form = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre delete GET');
 };
 
-// Handle Genre delete on POST.
+// Genre delete
 exports.genre_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre delete POST');
 };
 
-// Display Genre update form on GET.
+// Genre edit
 exports.genre_edit = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre update GET');
 };
 
-// Handle Genre update on POST.
+// Genre update
 exports.genre_update = function(req, res) {
     res.send('NOT IMPLEMENTED: Genre update POST');
 };

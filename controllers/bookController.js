@@ -1,41 +1,41 @@
 const bookModel = require('../models/book');
 
-// Display list of all books.
+// Book list
 exports.book_list = function(req, res) {
     res.send('NOT IMPLEMENTED: Book list');
 };
 
-// Display detail page for a specific book.
+// Book show
 exports.book_show = function(req, res) {
     res.send('NOT IMPLEMENTED: Book detail: ' + req.params.id);
 };
 
-// Display book create form on GET.
+// Book new
 exports.book_new = function(req, res) {
     res.send('NOT IMPLEMENTED: Book create GET');
 };
 
-// Handle book create on POST.
+// Book create
 exports.book_create = function(req, res) {
     res.send('NOT IMPLEMENTED: Book create POST');
 };
 
-// Display book delete form on GET.
+// Book delete form
 exports.book_delete_form = function(req, res) {
     res.send('NOT IMPLEMENTED: Book delete GET');
 };
 
-// Handle book delete on POST.
+// Book delete
 exports.book_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: Book delete POST');
 };
 
-// Display book update form on GET.
+// Book edit
 exports.book_edit = function(req, res) {
     res.send('NOT IMPLEMENTED: Book update GET');
 };
 
-// Handle book update on POST.
+// Book update
 exports.book_update = function(req, res) {
     res.send('NOT IMPLEMENTED: Book update POST');
 };
