@@ -22,7 +22,7 @@ router.get('/:author_id', bookController.bookinstance_show);
 router.get('/:author_id', bookController.bookinstance_edit);
 
 // Update
-router.update('/:author_id', bookController.bookinstance_update);
+router.put('/:author_id', bookController.bookinstance_update);
 
 // Delete
 router.delete('/:author_id', bookController.bookinstance_delete);

@@ -22,10 +22,10 @@ router.get('/:author_id', genreController.genre_show);
 router.get('/:author_id', genreController.genre_edit);
 
 // Update
-router.update('/:author_id', genreController.genre_update);
+router.put('/:author_id', genreController.genre_update);
 
 // Delete
-router.delete('/:author_id', genreController.genre_delete());
+router.delete('/:author_id', genreController.genre_delete);
 
 // Delete form
 router.get('/:author_id/delete', genreController.genre_delete_form);
