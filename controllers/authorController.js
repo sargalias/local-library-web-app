@@ -2,7 +2,12 @@ const authorModel = require('../models/author');
 
 // Author home (list of authors)
 exports.author_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Author list');
+    authorModel.find({})
+        .sort({'family_name': 1})
+        .exec((err, data) => {
+            if (err) return next(err);
+            res.render('author_list', {title: 'Author list', author_list: data});
+        });
 };
 
 // Author show

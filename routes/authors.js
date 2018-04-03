@@ -1,5 +1,6 @@
 const express = require('express');
 const authorController = require('../controllers/authorController');
+const async = require('async');
 
 const router = express.Router();
 

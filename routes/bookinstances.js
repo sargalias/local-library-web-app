@@ -1,5 +1,6 @@
 const express = require('express');
 const bookinstanceController = require('../controllers/bookinstanceController');
+const async = require('async');
 
 const router = express.Router();
 

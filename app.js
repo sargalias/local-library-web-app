@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
+const async = require('async');
 const mongoose = require('mongoose');
 const mongodb = require('./config/database').url;
 

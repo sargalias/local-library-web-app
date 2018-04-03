@@ -2,7 +2,12 @@ const bookModel = require('../models/book');
 
 // Book list
 exports.book_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Book list');
+    bookModel.find({}, 'title author')
+        .populate('author')
+        .exec((err, data) => {
+            if (err) return next(err);
+            res.render('book_list', {title: 'Book List', book_list: data});
+        });
 };
 
 // Book show

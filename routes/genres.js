@@ -1,5 +1,6 @@
 const express = require('express');
 const genreController = require('../controllers/genreController');
+const async = require('async');
 
 const router = express.Router();
 
