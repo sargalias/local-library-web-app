@@ -1,4 +1,7 @@
 const bookinstanceModel = require('../models/bookinstance');
+const bookModel = require('../models/book');
+const { body, validationResult } = require('express-validator/check');
+const { matchedData, sanitizeBody } = require('express-validator/filter');
 
 // Bookinstance list
 exports.bookinstance_list = function(req, res) {
@@ -29,13 +32,56 @@ exports.bookinstance_show = function(req, res, next) {
 
 // Bookinstance new
 exports.bookinstance_new = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create GET');
+    bookModel.find({}, (err, data) => {
+        if (err) return next(err);
+        res.render('bookinstance_new', {title: 'Create BookInstance', book_list: data, statusValues: bookinstanceModel.schema.path('status').enumValues});
+    });
 };
 
 // Bookinstance create
-exports.bookinstance_create = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance create POST');
-};
+exports.bookinstance_create = [
+    // Validate fields
+    body('book', 'Book is required').trim().isLength({min: 1}),
+    body('imprint', 'Imprint is required').trim().isLength({min: 1}),
+    body('due_back', 'Invalid date').optional({checkFalsy: true}).isISO8601(),
+    body('status', 'Status is required').trim().isLength({min: 1}),
+
+    // Sanitize fields
+    sanitizeBody('book').trim().escape(),
+    sanitizeBody('imprint').trim().escape(),
+    sanitizeBody('status').trim().escape(),
+    sanitizeBody('due_back').toDate(),
+
+
+    (req, res, next) => {
+        const errors = validationResult(req);
+        const data = matchedData(req);
+        const bookinstance = new bookinstanceModel({
+            book: data.book,
+            imprint: data.imprint,
+            status: req.body.status,
+            due_back: data.due_back
+        });
+
+        if (!errors.isEmpty()) {
+            bookModel.find({}, (err, data) => {
+                if (err) return next(err);
+                return res.render('bookinstance_new', {
+                    title: 'Create BookInstance',
+                    book_list: data,
+                    statusValues: bookinstanceModel.schema.path('status').enumValues,
+                    bookinstance: bookinstance,
+                    errors: errors.array()
+                });
+            });
+        } else {
+            bookinstance.save((err) => {
+                if (err) return next(err);
+                res.redirect('/catalog/bookinstances');
+            })
+        }
+    }
+];
 
 // Bookinstance delete form
 exports.bookinstance_delete_form = function(req, res) {
