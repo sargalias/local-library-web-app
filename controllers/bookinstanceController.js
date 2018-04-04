@@ -12,8 +12,19 @@ exports.bookinstance_list = function(req, res) {
 };
 
 // Bookinstance show
-exports.bookinstance_show = function(req, res) {
-    res.send('NOT IMPLEMENTED: BookInstance detail: ' + req.params.id);
+exports.bookinstance_show = function(req, res, next) {
+    bookinstanceModel.findById(req.params.bookinstance_id)
+        .populate('book')
+        .exec((err, data) => {
+            if (err) next(err);
+            if (data == null) {
+                err = new Error('Book Instance not found');
+                err.status = 404;
+                return next(err);
+            }
+            res.render('bookinstance_detail',
+                {title: 'ID', bookinstance: data});
+        });
 };
 
 // Bookinstance new

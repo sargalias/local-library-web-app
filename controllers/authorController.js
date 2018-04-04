@@ -1,4 +1,7 @@
+const async = require('async');
 const authorModel = require('../models/author');
+const bookModel = require('../models/book');
+const ObjectId = require('mongoose').Types.ObjectId;
 
 // Author home (list of authors)
 exports.author_list = function(req, res) {
@@ -11,8 +14,24 @@ exports.author_list = function(req, res) {
 };
 
 // Author show
-exports.author_show = function(req, res) {
-    res.send('NOT IMPLEMENTED: Show author ' + req.params.author_id);
+exports.author_show = function(req, res, next) {
+    async.parallel({
+        author: function(callback) {
+            authorModel.findById(req.params.author_id, callback);
+        },
+        books: function(callback) {
+            bookModel.find({author: ObjectId(req.params.author_id)}, callback)
+        }
+    }, function(err, results) {
+        if (err) return next(err);
+        if (results.author == null) {
+            err = new Error('Author not found');
+            err.status = 404;
+            return next(err);
+        }
+        res.render('author_detail',
+            {title: 'Author', author: results.author, books: results.books});
+    });
 };
 
 // Author new
