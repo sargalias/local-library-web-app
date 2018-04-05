@@ -4,10 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var sassMiddleware = require('node-sass-middleware');
-const async = require('async');
 const mongoose = require('mongoose');
 const mongodb = require('./config/database').url;
 const methodOverride = require('method-override');
+const compression = require('compression');
+const helmet = require('helmet');
 
 
 // Mongoose setup
@@ -17,7 +18,11 @@ db.on('error', console.error.bind(console, 'connection error:'));
 
 
 
-var app = express();
+const app = express();
+
+app.use(compression());
+app.use(helmet());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
