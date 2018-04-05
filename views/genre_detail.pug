@@ -15,3 +15,8 @@ block content
 
         else
             p This genre has no books.
+
+    p
+        a.btn.btn-primary(href='/catalog/genres/' + genre._id + '/edit') Edit
+    p
+        a.btn.btn-primary(href='/catalog/genres/' + genre._id + '/delete') Delete

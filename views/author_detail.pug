@@ -2,7 +2,8 @@ extends layout
 
 block content
     h1 #{title}: #{author.family_name}, #{author.first_name}
-    p #{author.lifespan}
+    if author.date_of_birth
+        p #{author.lifespan}
 
     div(style='margin-left: 20px; margin-top: 20px')
         h4 Books
@@ -14,3 +15,9 @@ block content
             dd #{book.summary}
         else
             dt There are no books for this author.
+
+    hr
+    p
+        a.btn.btn-primary(href=author.url+'/edit') Edit author
+    p
+        a.btn.btn-primary(href=author.url+'/delete') Delete author

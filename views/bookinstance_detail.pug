@@ -21,3 +21,10 @@ block content
 
     if bookinstance.status != 'Available'
         p #[strong Due back:] #{bookinstance.due_back_formatted}
+
+
+    p
+        a.btn.btn-primary(href='/catalog/bookinstances/' + bookinstance._id + '/edit') Edit
+
+    form(method="POST" action="/catalog/bookinstances/edit" + bookinstance._id + '/?_method=DELETE')
+        button.btn.btn-primary Delete

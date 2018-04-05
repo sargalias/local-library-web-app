@@ -7,7 +7,7 @@ var sassMiddleware = require('node-sass-middleware');
 const async = require('async');
 const mongoose = require('mongoose');
 const mongodb = require('./config/database').url;
-
+const methodOverride = require('method-override');
 
 
 // Mongoose setup
@@ -22,6 +22,8 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(methodOverride('_method'));
 
 app.use(logger('dev'));
 app.use(express.json());

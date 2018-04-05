@@ -1,5 +1,6 @@
 const genreModel = require('../models/genre');
 const bookModel = require('../models/book');
+const ObjectId = require('mongoose').Types.ObjectId;
 const async = require('async');
 const { body, validationResult } = require('express-validator/check');
 const { matchedData, sanitizeBody } = require('express-validator/filter');
@@ -85,20 +86,77 @@ exports.genre_create = [
 
 // Genre delete form
 exports.genre_delete_form = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete GET');
+    async.parallel({
+        genre: function(callback) {
+            genreModel.findById(req.params.genre_id).exec(callback);
+        },
+        genre_books: function(callback) {
+            bookModel.find({ 'genre': req.params.genre_id }).exec(callback);
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.genre==null) {
+            res.redirect('/catalog/genres');
+        }
+        res.render('genre_delete', { title: 'Delete Genre', genre: results.genre, genre_books: results.genre_books } );
+    });
 };
 
 // Genre delete
-exports.genre_delete = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre delete POST');
+exports.genre_delete = function(req, res, next) {
+    async.parallel({
+        genre: function(callback) {
+            genreModel.findById(req.params.genre_id).exec(callback);
+        },
+        genre_books: function(callback) {
+            bookModel.find({ 'genre': req.params.genre_id }).exec(callback);
+        },
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.genre_books.length > 0) {
+            res.render('genre_delete', { title: 'Delete Genre', genre: results.genre, genre_books: results.genre_books } );
+            return;
+        }
+        else {
+            genreModel.findByIdAndRemove(ObjectId(req.params.genre_id), (err) => {
+                if (err) return next(err);
+                res.redirect('/catalog/genres');
+            });
+        }
+    });
 };
 
 // Genre edit
-exports.genre_edit = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update GET');
+exports.genre_edit = function(req, res, err) {
+    genreModel.findById(req.params.genre_id, function(err, genre) {
+        if (err) { return next(err); }
+        if (genre==null) {
+            err = new Error('Genre not found');
+            err.status = 404;
+            return next(err);
+        }
+        res.render('genre_edit', { title: 'Update Genre', genre: genre });
+    });
 };
 
 // Genre update
-exports.genre_update = function(req, res) {
-    res.send('NOT IMPLEMENTED: Genre update POST');
-};
+exports.genre_update = [
+    body('name', 'Genre name required').isLength({ min: 1 }).trim(),
+    sanitizeBody('name').trim().escape(),
+
+    (req, res, next) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            genreModel.findById(req.params.genre_id, (err, data) => {
+                if (err) return next(err);
+                return res.render('genre_form', { title: 'Update Genre', genre: data, errors: errors.array()});
+            });
+        }
+        else {
+            genreModel.findByIdAndUpdate(ObjectId(req.params.genre_id), {name: req.body.name}, (err,thegenre) => {
+                if (err) { return next(err); }
+                res.redirect(thegenre.url);
+            });
+        }
+    }
+];

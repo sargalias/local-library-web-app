@@ -36,3 +36,8 @@ block content
                 a(href=val.url) #{val.id}
         else
             p There are no copies for this book in the library
+
+    p
+        a.btn.btn-primary(href=book.url + '/edit') Edit Book
+    p
+        a.btn.btn-primary(href=book.url + '/delete') Delete book
