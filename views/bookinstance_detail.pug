@@ -26,5 +26,5 @@ block content
     p
         a.btn.btn-primary(href='/catalog/bookinstances/' + bookinstance._id + '/edit') Edit
 
-    form(method="POST" action="/catalog/bookinstances/edit" + bookinstance._id + '/?_method=DELETE')
+    form(method="POST" action="/catalog/bookinstances/" + bookinstance._id + '?_method=DELETE')
         button.btn.btn-primary Delete
