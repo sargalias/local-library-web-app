@@ -28,29 +28,30 @@ html(lang='en')
         link(rel='stylesheet', href='/stylesheets/style.css')
 
     body
+        .top-bar.flex-center.bg-dark
+            .text-light Local Library
         .container-fluid
             .row
-                .col-sm-2
-                    block sidebar
-                        ul.sidebar-nav
-                            li
-                                a(href='/catalog') Home
-                            li
-                                a(href='/catalog/books') Books
-                            li
-                                a(href='/catalog/authors') Authors
-                            li
-                                a(href='/catalog/genres') Genres
-                            li
-                                a(href='/catalog/bookinstances') Book instances
-                            hr
-                            li
-                                a(href='/catalog/books/new') New book
-                            li
-                                a(href='/catalog/authors/new') New author
-                            li
-                                a(href='/catalog/genres/new') New genre
-                            li
-                                a(href='/catalog/bookinstances/new') New book instance
-                .col-sm-10
+                .col-sm-2.sidebar-col
+                    ul.sidebar-nav
+                        li
+                            a(href='/catalog') Home
+                        li
+                            a(href='/catalog/books') Books
+                        li
+                            a(href='/catalog/authors') Authors
+                        li
+                            a(href='/catalog/genres') Genres
+                        li
+                            a(href='/catalog/bookinstances') Book instances
+                        hr
+                        li
+                            a(href='/catalog/books/new') New book
+                        li
+                            a(href='/catalog/authors/new') New author
+                        li
+                            a(href='/catalog/genres/new') New genre
+                        li
+                            a(href='/catalog/bookinstances/new') New book instance
+                .col-sm-10.content
                     block content
